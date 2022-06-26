@@ -18,6 +18,9 @@ use crate::msg::to_xml::proto_to_xml;
 pub async fn to_proto_event(bot: &Arc<Bot>, event: QEvent) -> Option<pbbot::frame::Data> {
     match event {
         QEvent::GroupMessage(e) => {
+            if e.inner.from_uin == e.client.uin().await{
+                return  None;
+            }
             tracing::info!(
                 "MESSAGE (GROUP={}): {}",
                 e.inner.group_code,
@@ -28,6 +31,9 @@ pub async fn to_proto_event(bot: &Arc<Bot>, event: QEvent) -> Option<pbbot::fram
             ))
         }
         QEvent::FriendMessage(e) => {
+            if e.inner.from_uin == e.client.uin().await{
+                return  None;
+            }
             tracing::info!(
                 "MESSAGE (FRIEND={}): {}",
                 e.inner.from_uin,
