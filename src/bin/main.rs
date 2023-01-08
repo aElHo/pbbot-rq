@@ -13,7 +13,7 @@ use tracing::Level;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
-use pbbot_rq::handler::{bot, password, plugins, qrcode};
+use pbrq::handler::{bot, password, plugins, qrcode};
 
 /// Simple program to greet a person
 #[derive(Parser, Debug)]
@@ -119,7 +119,7 @@ fn init_log() {
         .with(
             tracing_subscriber::filter::Targets::new()
                 .with_target("main", Level::DEBUG)
-                .with_target("pbbot_rq", Level::DEBUG)
+                .with_target("pbrq", Level::DEBUG)
                 .with_target("ricq", Level::DEBUG),
         )
         .init();
